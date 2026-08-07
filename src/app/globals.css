@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+:root {
+  --bg-deep: #050a14;
+  --bg-mid: #0b1220;
+  --bg-card: rgba(12, 22, 38, 0.78);
+  --bg-card-solid: #101b2e;
+  --accent: #7dd3fc;
+  --accent-soft: #bae6fd;
+  --accent-muted: #7aa8c7;
+  --silver: #c8d5e3;
+  --emerald: #34d399;
+  --emerald-glow: rgba(52, 211, 153, 0.55);
+  --text: #f4f7fb;
+  --text-muted: #a7b6c7;
+  --border: rgba(125, 211, 252, 0.28);
+  --cta: #38bdf8;
+  --cta-text: #041018;
+}
+
+@theme inline {
+  --color-background: var(--bg-deep);
+  --color-foreground: var(--text);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-muted: var(--accent-muted);
+  --color-silver: var(--silver);
+  --color-emerald: var(--emerald);
+  --color-card: var(--bg-card-solid);
+  --color-muted: var(--text-muted);
+  --color-cta: var(--cta);
+  --color-cta-text: var(--cta-text);
+  --font-sans: var(--font-outfit);
+  --font-display: var(--font-syne);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  width: 100%;
+  overflow-x: clip;
+}
+
+body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  min-height: 100%;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+::selection {
+  background: rgba(56, 189, 248, 0.35);
+  color: #fff;
+}
+
+.site-bg {
+  position: relative;
+  background-color: var(--bg-deep);
+  isolation: isolate;
+}
+
+.site-bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: url("/images/hero-bg.png") center top / cover no-repeat;
+  filter: hue-rotate(165deg) saturate(0.75) brightness(0.45) contrast(1.05);
+}
+
+.site-bg::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(5, 10, 20, 0.45) 0%, rgba(5, 10, 20, 0.7) 40%, rgba(5, 10, 20, 0.94) 75%, #050a14 100%),
+    radial-gradient(ellipse at 50% 20%, rgba(56, 189, 248, 0.12), transparent 55%);
+}
+
+@media (min-width: 768px) {
+  .site-bg::after {
+    background:
+      linear-gradient(180deg, rgba(5, 10, 20, 0.45) 0%, rgba(5, 10, 20, 0.7) 40%, rgba(5, 10, 20, 0.94) 75%, #050a14 100%),
+      linear-gradient(90deg, rgba(5, 10, 20, 0.75) 0%, transparent 18%, transparent 82%, rgba(5, 10, 20, 0.75) 100%),
+      radial-gradient(ellipse at 50% 20%, rgba(56, 189, 248, 0.12), transparent 55%);
+  }
+}
+
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+}
+
+.featured-glow {
+  box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.7), 0 0 28px var(--emerald-glow);
+  border-color: rgba(52, 211, 153, 0.85);
+}
+
+.progress-track {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #38bdf8, #34d399);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 50%, #0ea5e9 100%);
+  color: var(--cta-text);
+  font-weight: 700;
+  transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.35);
+}
+
+.btn-ghost {
+  border: 1px solid var(--border);
+  color: var(--accent-soft);
+  background: transparent;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-ghost:hover {
+  background: rgba(125, 211, 252, 0.08);
+  border-color: rgba(125, 211, 252, 0.5);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease both;
+}
+
+.animate-fade-up-delay-1 {
+  animation: fade-up 0.7s ease 0.1s both;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fade-up 0.7s ease 0.2s both;
+}
+
+.faq-details summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.faq-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-details[open] .faq-chevron {
+  transform: rotate(180deg);
+}
