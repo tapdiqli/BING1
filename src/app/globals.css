@@ -32,6 +32,7 @@
   --color-cta-text: var(--cta-text);
   --font-sans: var(--font-outfit);
   --font-display: var(--font-syne);
+  --font-bonus: var(--font-anton), Impact, Haettenschweiler, "Arial Black", sans-serif;
 }
 
 * {

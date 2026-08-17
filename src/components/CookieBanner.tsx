@@ -7,6 +7,19 @@ const KEY = "bcfuk-cookie-consent";
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
+  const [cloaked, setCloaked] = useState(false);
+
+  useEffect(() => {
+    const sync = () =>
+      setCloaked(document.body.getAttribute("data-cloaked") === "1");
+    sync();
+    const observer = new MutationObserver(sync);
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["data-cloaked"],
+    });
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     try {
@@ -25,7 +38,7 @@ export function CookieBanner() {
     setVisible(false);
   }
 
-  if (!visible) return null;
+  if (cloaked || !visible) return null;
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-[#071018]/95 px-4 py-4 backdrop-blur-md">

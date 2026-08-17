@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Outfit, Syne } from "next/font/google";
+import { Anton, Outfit, Syne } from "next/font/google";
+import { Suspense } from "react";
 import { AdvertorialBar } from "@/components/AdvertorialBar";
 import { CookieBanner } from "@/components/CookieBanner";
 import { Footer } from "@/components/Footer";
+import { GclidCapture } from "@/components/GclidCapture";
 import { Navbar } from "@/components/Navbar";
 import "./globals.css";
 
@@ -14,6 +16,12 @@ const outfit = Outfit({
 const syne = Syne({
   variable: "--font-syne",
   subsets: ["latin"],
+});
+
+const anton = Anton({
+  variable: "--font-anton",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -28,8 +36,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-GB" className={`${outfit.variable} ${syne.variable} h-full antialiased`}>
+    <html
+      lang="en-GB"
+      className={`${outfit.variable} ${syne.variable} ${anton.variable} h-full antialiased`}
+    >
       <body className="site-bg flex min-h-full w-full max-w-[100vw] flex-col overflow-x-clip font-sans">
+        <Suspense fallback={null}>
+          <GclidCapture />
+        </Suspense>
         <AdvertorialBar />
         <Navbar />
         <div className="w-full flex-1">{children}</div>
