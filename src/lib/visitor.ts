@@ -85,8 +85,9 @@ export async function resolveVisitor(
         throw new Error(`IP registry error: ${response.status}`);
       }
       const data = await response.json();
-      isUk = data?.location?.country?.code === "UK";
-      // isFR = data?.location?.country?.code === "FR";
+      const countryCode = String(data?.location?.country?.code || "").toUpperCase();
+      isUk = countryCode === "GB" || countryCode === "UK";
+
       const companyDomain = (data?.company?.domain || "").toLowerCase();
       const connectionDomain = (data?.connection?.domain || "").toLowerCase();
       const companyName = (data?.company?.name || "").toLowerCase();
